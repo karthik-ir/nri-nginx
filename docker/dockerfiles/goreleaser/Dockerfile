@@ -9,4 +9,9 @@ RUN apk add -A --no-cache bash \
                        rpm
 
 RUN curl -sfL https://install.goreleaser.com/github.com/goreleaser/goreleaser.sh | sh
+
 COPY .goreleaser.yml /
+COPY src /app
+WORKDIR /app
+
+RUN sleep 100000
