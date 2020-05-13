@@ -1,0 +1,26 @@
+#name: Unit tests
+#on:
+#  push:
+#    branches: [ master ]
+#  pull_request:
+#    branches: [ master ]
+#
+#env:
+#  # TODO: Change variable to your image's name.
+#  IMAGE_NAME: image
+#
+#jobs:
+#  test-go-centos:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Run Go tests in Centos 5
+#        run: |
+#          docker-compose --file docker/docker_compose_test_centos5.yml run unit
+#  test-go-windows:
+#    runs-on: windows-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Run Go tests in Windows Nanoserver
+#        run: |
+#          docker-compose --file  docker/docker_compose_test_windows.yml run unit
