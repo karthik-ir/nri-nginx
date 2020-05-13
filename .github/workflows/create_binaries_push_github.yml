@@ -11,5 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Create binaries
+        env:
+          ${{ secrets.AWS_REGION }}
         run: |
           docker-compose --file docker_compose_goreleaser.yml run release

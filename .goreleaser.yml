@@ -10,7 +10,7 @@ project_name: infrastructure-agent
 builds:
 #- id: "my-build"
   -
-    main: ./app/cmd/webapp
+    main: .
     env:
       - CGO_ENABLED=0
     goos:
