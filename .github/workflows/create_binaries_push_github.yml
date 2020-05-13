@@ -1,15 +1,15 @@
-name: Create Binaries and push to GH
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-jobs:
-  build-binaries:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Create binaries
-        run: |
-          docker-compose --file  docker/docker_compose_goreleaser.yml run release
+#name: Create Binaries and push to GH
+#on:
+#  push:
+#    branches: [ master ]
+#  pull_request:
+#    branches: [ master ]
+#
+#jobs:
+#  build-binaries:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Create binaries
+#        run: |
+#          docker-compose --file  docker/docker_compose_goreleaser.yml run release
