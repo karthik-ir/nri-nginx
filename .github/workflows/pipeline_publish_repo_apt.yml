@@ -1,34 +1,34 @@
-name: Publish-to-APT-repo
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Push package to APT repo in S3 with Aptly
-      run: |
-        docker run -i --privileged --name aptly-s3fuse \
-        -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
-        -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
-        -e AWS_REGION=${{ secrets.AWS_REGION }} \
-        -e AWS_APTLY_FRONTEND_STORAGE_NAME='nr-repo-apt' \
-        -e AWS_STORAGE_BUCKET_NAME='nr-aptly-backend' \
-        -e AWS_S3_MOUNTPOINT='/mnt/aptly' \
-        -e APTLY_REPO_NAME='bionic-main' \
-        -e APT_NEW_DEB_PACKAGE='' \
-        jportasa/aptly-s3fuse:1.0 \
-        bash -c """ \
-             aws ssm get-parameters --names 'gpg_private_key' --query 'Parameters[0].Value' --output text > gpg_private_key.gpg; \
-             gpg --import gpg_private_key.gpg; \
-             gpg --list-keys; \
-             wget https://download.newrelic.com/infrastructure_agent/linux/apt/pool/main/n/nri-haproxy/nri-haproxy_0.1.0-1_amd64.deb; \
-             aptly repo add 'bionic-main' ./nri-haproxy_0.1.0-1_amd64.deb; \
-             aptly publish update bionic s3:nr-repo-apt:
-        """
-
+#name: Publish APT repo
+#on:
+#  push:
+#    branches: [ master ]
+#  pull_request:
+#    branches: [ master ]
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: Push package to APT repo in S3 with Aptly
+#      run: |
+#        docker run -i --privileged --name aptly-s3fuse \
+#        -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
+#        -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+#        -e AWS_REGION=${{ secrets.AWS_REGION }} \
+#        -e AWS_APTLY_FRONTEND_STORAGE_NAME='nr-repo-apt' \
+#        -e AWS_STORAGE_BUCKET_NAME='nr-aptly-backend' \
+#        -e AWS_S3_MOUNTPOINT='/mnt/aptly' \
+#        -e APTLY_REPO_NAME='bionic-main' \
+#        -e APT_NEW_DEB_PACKAGE='' \
+#        jportasa/aptly-s3fuse:1.0 \
+#        bash -c """ \
+#             aws ssm get-parameters --names 'gpg_private_key' --query 'Parameters[0].Value' --output text > gpg_private_key.gpg; \
+#             gpg --import gpg_private_key.gpg; \
+#             gpg --list-keys; \
+#             wget https://download.newrelic.com/infrastructure_agent/linux/apt/pool/main/n/nri-haproxy/nri-haproxy_0.1.0-1_amd64.deb; \
+#             aptly repo add 'bionic-main' ./nri-haproxy_0.1.0-1_amd64.deb; \
+#             aptly publish update bionic s3:nr-repo-apt:
+#        """
+#
 
 
 

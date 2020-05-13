@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+
+  release:
+    build: dockerfiles/goreleaser
+    command: bash -c "goreleaser release --config=.goreleaser.yml --rm-dist"
