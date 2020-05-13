@@ -14,4 +14,4 @@ COPY .goreleaser.yml /
 COPY src /app
 WORKDIR /app
 
-RUN sleep 100000
+#RUN sleep 100000
