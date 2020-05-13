@@ -17,3 +17,4 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           docker-compose --file docker_compose_goreleaser.yml run release
+
