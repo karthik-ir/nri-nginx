@@ -6,7 +6,7 @@ before:
     #- go mod download
     # you may remove this if you don't need go generate
     #- go generate ./...
-project_name: newrelic-integrations
+project_name: infrastructure-agent
 builds:
 #- id: "my-build"
   -
@@ -15,6 +15,7 @@ builds:
       - CGO_ENABLED=0
     goos:
     - linux
+    - darwin
     - windows
     goarch:
     - 386
@@ -22,8 +23,9 @@ builds:
     - arm
     - arm64
 archives:
-  - 
+  -
     replacements:
+      darwin: Darwin
       linux: Linux
       windows: Windows
       386: i386
@@ -55,15 +57,15 @@ nfpms:
 
     # Your app's vendor.
     # Default is empty.
-    vendor: New Relic
+    vendor: Dustin Hendel
 
     # Your app's homepage.
     # Default is empty.
-    homepage: https://github.com/newrelic
+    homepage: https://github.com/dahendel/docker-machine-cloudstack
 
     # Your app's maintainer (probably you).
     # Default is empty.
-    maintainer: Joan Porta
+    maintainer: Joan Porta <jportacloud@gmail.com>
 
     # Your app's description.
     # Default is empty.
