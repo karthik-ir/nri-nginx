@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+
+  unit:
+    build: dockerfiles/centos/centos5
+    volumes:
+      - ./src:/usr/src/app
+    working_dir: /usr/src/app
+    command: bash -c "go test -v"
