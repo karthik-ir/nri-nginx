@@ -7,4 +7,4 @@ services:
     volumes:
       - ./src:/usr/src/app
     working_dir: /usr/src/app
-    command: bash -c "goreleaser release --config=.goreleaser.yml --rm-dist"
+    command: bash -c "goreleaser release --config=/.goreleaser.yml --rm-dist"
