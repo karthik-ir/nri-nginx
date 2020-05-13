@@ -7,4 +7,8 @@ services:
       context: .
       dockerfile: docker/dockerfiles/goreleaser/Dockerfile
     working_dir: /repo/src
-    command: bash -c "export GITHUB_TOKEN=`aws ssm get-parameters --region 'us-east-1' --names 'github_token' --query 'Parameters[0].Value' --output text`; echo "kk"; echo $GITHUB_TOKEN; goreleaser release --config=/.goreleaser.yml --rm-dist"
+    environment:
+      - AWS_REGION=$AWS_REGION
+      - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+    command: bash -c "GITHUB_TOKEN=`aws ssm get-parameters --names 'github_token' --region $AWS_REGION --query 'Parameters[0].Value' --output text`; export GITHUB_TOKEN; goreleaser release --config=/.goreleaser.yml --rm-dist --snapshot"
