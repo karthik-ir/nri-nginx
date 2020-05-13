@@ -7,4 +7,4 @@ services:
       context: .
       dockerfile: docker/dockerfiles/goreleaser/Dockerfile
     working_dir: /repo/src
-    command: bash -c "export GITHUB_TOKEN=`aws ssm get-parameters --names 'github_token' --query 'Parameters[0].Value' --output text`; goreleaser release --config=/.goreleaser.yml --rm-dist --snap"
+    command: bash -c "export GITHUB_TOKEN=`aws ssm get-parameters --names 'github_token' --query 'Parameters[0].Value' --output text`; echo $GITHUB_ACTIONS; goreleaser release --config=/.goreleaser.yml --rm-dist"
