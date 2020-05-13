@@ -6,5 +6,5 @@ services:
     build:
       context: .
       dockerfile: docker/dockerfiles/goreleaser/Dockerfile
-    working_dir: /app
-    command: bash -c "goreleaser release --config=/.goreleaser.yml --rm-dist"
+    working_dir: /repo/src
+    command: bash -c "sleep 10000; goreleaser release --config=/.goreleaser.yml --rm-dist"
