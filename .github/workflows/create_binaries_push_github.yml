@@ -2,10 +2,9 @@ name: Create Binaries and push to GH
 on:
   push:
     branches: [ master ]
+    tags: *
   pull_request:
     branches: [ master ]
-  tags:
-    - *
 
 jobs:
   build-binaries:
