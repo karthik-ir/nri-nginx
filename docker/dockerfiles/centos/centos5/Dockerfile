@@ -1,29 +1,48 @@
+# Inspired on https://github.com/jeromerobert/centos5-gcc5/blob/master/Dockerfile
 FROM centos:5
-ENV GO_VERSION 1.14
+ENV GO_VERSION 1.9
 ENV GIT_VERSION 1.8.2.3
 
-# This image extends a basic Centos 5 system by installing some packages
-# needed for developmemt.
+RUN rm -f /etc/yum.repos.d/*
+ADD yum.repos.d/ /etc/yum.repos.d/
+RUN echo 'exclude = *.i?86' >> /etc/yum.conf
+RUN echo /usr/local/lib > /etc/ld.so.conf.d/local.conf && echo /usr/local/lib64 >> /etc/ld.so.conf.d/local.conf
+ENV PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig:/usr/local/lib/pkgconfig
+ARG NUM_CPU=24
+RUN yum install -y curl bzip2 gcc-c++ make m4 file pkgconfig perl expat-devel zlib-devel gettext \
+    which openssh-clients rsync bzip2-devel readline-devel mesa-libGLU-devel man xz patch \
+    libXt-devel libXtst libXrender libXi unzip \
+    && yum clean all && rm -rf /usr/share/locale
+ADD clean /root/
+RUN chmod u+x /root/clean
+WORKDIR /tmp
 
-# Since Centos5 is EOL since April 2017, yum needs to check the "vault"-repositories
-# (copied from https://github.com/astj/docker-centos5-vault )
-COPY yum.repos.d /etc/yum.repos.d/
+# OpenSSL
+RUN curl https://www.openssl.org/source/openssl-1.0.2q.tar.gz | tar xz \
+    && cd * \
+    && ./config --prefix=/usr/local --openssldir=/usr/local shared \
+    && make && make install \
+    && mkdir /usr/local/ssl && cd /usr/local/ssl \
+    && ln -s ../include/openssl include && ln -s ../lib64 lib \
+    && rm /usr/local/lib64/libcrypto.a /usr/local/lib64/libssl.a \
+    && /root/clean
 
-# Git install
-RUN yum install -y wget gcc make perl tcl gettext curl-devel
-RUN wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-$GIT_VERSION.tar.gz && \
-    tar -xf git-$GIT_VERSION.tar.gz && \
-    rm git-$GIT_VERSION.tar.gz && \
-    cd git-$GIT_VERSION && \
-    ./configure && \
-    make && \
-    make install
+# Curl
+RUN curl http://cdn-fastly.deb.debian.org/debian/pool/main/c/curl/curl_7.64.0.orig.tar.gz | tar xz \
+    && cd * && ./configure --disable-static && make -j $NUM_CPU && make install \
+    && yum remove -y curl expat-devel && /root/clean \
+    && curl https://curl.haxx.se/ca/cacert.pem -o /etc/pki/tls/certs/ca-bundle.crt
 
-# Go install
-RUN wget -q --no-check-certificate https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz; \
-    tar -xf go$GO_VERSION.linux-amd64.tar.gz; \
-    rm go$GO_VERSION.linux-amd64.tar.gz; \
-    chown -R root:root ./go; \
-    mv go /usr/local
+# Git
+RUN curl -L https://www.kernel.org/pub/software/scm/git/git-2.20.1.tar.gz | tar xz \
+    && cd * && ./configure --prefix=/usr/local && make -j $NUM_CPU  \
+    && make NO_INSTALL_HARDLINKS=YesPlease install && /root/clean
+
+## Go install
+RUN curl -L https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz | tar xz \
+    && chown -R root:root ./go \
+    && mv go /usr/local
 
 ENV PATH "$PATH:/usr/local/go/bin"
+
+
