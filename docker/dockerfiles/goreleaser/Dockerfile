@@ -13,6 +13,6 @@ RUN curl -sfL https://install.goreleaser.com/github.com/goreleaser/goreleaser.sh
 RUN rm /var/cache/apk/*
 
 COPY .goreleaser.yml /
-COPY . /repo
+COPY . /go/src/github.com/newrelic/nri-nginx/
 
-WORKDIR /repo/src
+WORKDIR /go/src/github.com/newrelic/nri-nginx/
