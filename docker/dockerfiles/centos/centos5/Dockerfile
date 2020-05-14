@@ -41,8 +41,8 @@ RUN curl -L https://www.kernel.org/pub/software/scm/git/git-2.20.1.tar.gz | tar 
 ## Go install
 RUN curl -L https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz | tar xz \
     && chown -R root:root ./go \
-    && mv go /usr/local
+    && mv go /root
 
-ENV PATH "$PATH:/usr/local/go/bin"
+ENV PATH "$PATH:/root/go/bin"
 
 
