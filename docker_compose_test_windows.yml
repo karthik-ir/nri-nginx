@@ -7,3 +7,4 @@ services:
     volumes:
       - ./src/app:c:/gopath
     command: "go test -v"
+
