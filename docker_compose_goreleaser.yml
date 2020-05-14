@@ -10,4 +10,4 @@ services:
       - AWS_REGION=$AWS_REGION
       - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
       - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-    command: bash -c "export GITHUB_TOKEN=`aws ssm get-parameters --names 'github_token' --region $AWS_REGION --query 'Parameters[0].Value' --output text`; goreleaser release --config=/.goreleaser.yml --rm-dist"
+    command: bash -c "export GITHUB_TOKEN=`aws ssm get-parameters --names 'github_token' --region $AWS_REGION --query 'Parameters[0].Value' --output text`; git tag; goreleaser release --config=/.goreleaser.yml --rm-dist"
