@@ -4,7 +4,6 @@ services:
 
   unit:
     build: docker/dockerfiles/centos/centos5
-      context: .
       dockerfile: docker/dockerfiles/centos/centos5
     volumes:
       - .:/go/src/github.com/newrelic/nri-nginx/
