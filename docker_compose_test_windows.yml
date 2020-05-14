@@ -3,7 +3,7 @@ version: '3'
 services:
 
   unit:
-    build: dockerfiles/windows/nanoserver
+    build: docker/dockerfiles/windows/nanoserver
     volumes:
       - ./src/app:c:/gopath
     command: "go test -v"

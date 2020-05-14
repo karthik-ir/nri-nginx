@@ -3,9 +3,11 @@ version: '3'
 services:
 
   unit:
-    build: dockerfiles/centos/centos5
+    build: docker/dockerfiles/centos/centos5
+      context: .
+      dockerfile: docker/dockerfiles/centos/centos5
     volumes:
-      - ./src:/usr/src/app
-    working_dir: /usr/src/app
+      - .:/go/src/github.com/newrelic/nri-nginx/
+    working_dir: /go/src/github.com/newrelic/nri-nginx/
     command: bash -c "go test -v"
 
