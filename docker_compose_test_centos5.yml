@@ -3,7 +3,7 @@ version: '3'
 services:
 
   unit:
-    build: docker/dockerfiles/centos/centos5
+    build:
       context: .
       dockerfile: docker/dockerfiles/centos/centos5/Dockerfile
     volumes:
