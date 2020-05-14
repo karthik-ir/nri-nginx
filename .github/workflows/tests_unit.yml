@@ -17,10 +17,10 @@ jobs:
       - name: Run Go tests in Centos 5
         run: |
           docker-compose --file docker_compose_test_centos5.yml run unit
-  Test-go-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run Go tests in Windows Nanoserver
-        run: |
-          docker-compose --file  docker_compose_test_windows.yml run unit
+#  Test-go-windows:
+#    runs-on: windows-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Run Go tests in Windows Nanoserver
+#        run: |
+#          docker-compose --file  docker_compose_test_windows.yml run unit
