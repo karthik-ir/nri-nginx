@@ -4,7 +4,8 @@ services:
 
   unit:
     build: docker/dockerfiles/windows/nanoserver
+    working_dir: c:/go/src/github.com/newrelic/nri-nginx/
     volumes:
-      - ./src/app:c:/gopath
+      - . :c:/go/src/github.com/newrelic/nri-nginx/
     command: "go test -v"
 
