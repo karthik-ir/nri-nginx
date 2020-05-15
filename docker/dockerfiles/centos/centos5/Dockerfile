@@ -39,7 +39,7 @@ RUN curl -L https://www.kernel.org/pub/software/scm/git/git-2.20.1.tar.gz | tar 
     && make NO_INSTALL_HARDLINKS=YesPlease install && /root/clean
 
 ## Go install
-RUN curl -L https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz | tar xz \
+RUN curl https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz | tar xz \
     && chown -R root:root ./go \
     && mv go /root
 
