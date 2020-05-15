@@ -16,7 +16,7 @@ jobs:
           go-version: '1.14'
       - run: |
          pwd
-         make integration-tests
+         make integration-test
 
 
 
