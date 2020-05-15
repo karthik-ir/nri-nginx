@@ -7,7 +7,7 @@ services:
       context: docker/dockerfiles/centos/centos5/
       dockerfile: Dockerfile
     volumes:
-      - ${PWD}:/repo
-    working_dir: /repo
-    command: bash -c "make test"
+      - ${PWD}:/go/src/github.com/newrelic/nri-nginx/
+    working_dir: /go/src/github.com/newrelic/nri-nginx/
+    command: bash -c "export PATH=$PATH:/root/go/bin; go test ./src/ -gcflags='-lang=go1.9'"
 

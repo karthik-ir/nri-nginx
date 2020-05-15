@@ -1,6 +1,6 @@
 # Inspired on https://github.com/jeromerobert/centos5-gcc5/blob/master/Dockerfile
 FROM centos:5
-ENV GO_VERSION 1.9
+ENV GO_VERSION 1.14
 ENV GIT_VERSION 1.8.2.3
 
 RUN rm -f /etc/yum.repos.d/*
@@ -43,6 +43,6 @@ RUN curl -L https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.
     && chown -R root:root ./go \
     && mv go /root
 
-ENV PATH "$PATH:/root/go/bin"
+ENV GOPATH /root
 
 

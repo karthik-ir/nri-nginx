@@ -9,5 +9,5 @@ services:
     volumes:
       - ${PWD}:c:/repo
     working_dir: /repo
-    command: bash -c "make test-deps"
+    command: bash -c "sleep 10000; make test-deps"
 
