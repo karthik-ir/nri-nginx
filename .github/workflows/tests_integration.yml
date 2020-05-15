@@ -15,7 +15,8 @@ jobs:
           stable: 'true'
           go-version: '1.14'
       - run: |
-         pwd
+         echo $GOPATH
+         echo $GOROOT
          make integration-test
 
 
