@@ -34,9 +34,12 @@ jobs:
       - name: Install Chocolatey
         shell: powershell
         run: Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-      - name: Choco help
+      - name: Choco install Go
         uses: crazy-max/ghaction-chocolatey@v1
         with:
-          args: install golang --version 1.14 -y -vv
+          args: install golang --version 1.14 -y
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Install Chocolatey
+        shell: cmd
+        run:  cd
