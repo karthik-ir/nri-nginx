@@ -1,6 +1,6 @@
 # Inspired on https://github.com/jeromerobert/centos5-gcc5/blob/master/Dockerfile
 FROM centos:5
-ENV GO_VERSION 1.14
+ENV GO_VERSION 1.9
 ENV GIT_VERSION 1.8.2.3
 
 RUN rm -f /etc/yum.repos.d/*

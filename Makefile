@@ -75,7 +75,7 @@ test-deps: compile-deps
 
 test-only:
 	@echo "=== $(INTEGRATION) === [ test ]: running unit tests..."
-	@gocov test ./... -gcflags='-lang=go1.9' | gocov-xml > coverage.xml
+	@gocov test ./... | gocov-xml > coverage.xml
 
 test: test-deps test-only
 
