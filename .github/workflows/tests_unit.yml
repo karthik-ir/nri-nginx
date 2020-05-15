@@ -40,6 +40,6 @@ jobs:
           args: install golang --version 1.14 -y
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install Chocolatey
+      - name: Run Go tests
         shell: cmd
-        run:  cd
+        run:  go test ./src/
