@@ -18,6 +18,5 @@ jobs:
           tar -xf go$GO_VERSION.linux-amd64.tar.gz
           export GOPATH=./go
           export GOROOT=.
-      - name: Run Integration Tests
-        run: |
           make integration-test
+
