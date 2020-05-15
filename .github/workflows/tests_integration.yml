@@ -16,7 +16,8 @@ jobs:
         run: |
           curl -O https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz
           tar -xf go$GO_VERSION.linux-amd64.tar.gz
-          export PATH=$PATH:./go/bin
+          export GOPATH=./go
+          export GOROOT=.
       - name: Run Integration Tests
         run: |
           make integration-test
