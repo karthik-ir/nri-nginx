@@ -21,6 +21,7 @@ jobs:
          echo "GOROOT: $GOROOT"
          echo "Current dir: ${PWD}"
          ls -la
+         go get ./...
          make integration-test
 
 
