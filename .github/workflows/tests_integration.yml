@@ -14,7 +14,6 @@ jobs:
         env:
           GO_VERSION: 1.14
         run: |
-          apt install curl -y
           curl -O https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz
           tar -xf go$GO_VERSION.linux-amd64.tar.gz
           export PATH=$PATH:./go/bin
