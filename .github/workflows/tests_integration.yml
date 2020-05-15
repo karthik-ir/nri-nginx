@@ -14,9 +14,11 @@ jobs:
         with:
           stable: 'true'
           go-version: '1.14'
-      - run: |
+      - name: Integration Tests
+        run: |
          echo "GOPATH: $GOPATH"
          echo "GOROOT: $GOROOT"
+         echo "Current dir: ${PWD}"
          make integration-test
 
 
