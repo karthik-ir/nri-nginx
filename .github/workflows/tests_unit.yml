@@ -26,7 +26,6 @@ env:
 #        run: |
 #          docker-compose --file  docker_compose_test_windows.yml run unit
 
-on: push
 
 jobs:
   test:
