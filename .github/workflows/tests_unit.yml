@@ -31,12 +31,12 @@ jobs:
   test:
     runs-on: windows-2019
     steps:
-      - name: Install Chocolatey PowerShell Module
+      - name: Install Chocolatey
         shell: powershell
         run: Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-      - name: Checkout
-        uses: actions/checkout@v2
       - name: Choco help
         uses: crazy-max/ghaction-chocolatey@v1
         with:
-          args: -h
+          args: install golang --version 1.14 -y -vv
+      - name: Checkout
+        uses: actions/checkout@v2
