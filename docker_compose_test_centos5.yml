@@ -9,5 +9,5 @@ services:
     volumes:
       - ${PWD}:/go/src/github.com/newrelic/nri-nginx/
     working_dir: /go/src/github.com/newrelic/nri-nginx/
-    command: bash -c "export PATH=$PATH:/root/go/bin; make test"
+    command: bash -c "export GOPATH=/go/ PATH=$PATH:/root/go/bin; make test"
 
